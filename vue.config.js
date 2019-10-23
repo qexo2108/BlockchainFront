@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/twitch-stats/'
+  publicPath: '/blockchain-viewer/'
 }
