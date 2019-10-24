@@ -1,76 +1,102 @@
 
 <template>
-    <v-container grid-list-md text-xs-center>
-        <v-layout row wrap>
-
-            Here will be list of blocks
-
-<!--{{channels}}-->
-
-<!--            <v-flex xs2 v-for="channel in channels" :key="channel.channelName"> &lt;!&ndash; sm6 offset-sm3 &ndash;&gt;-->
-<!--                <v-card>-->
 
 
 
-<!--                    <v-img-->
-<!--                            :src="channel.channelPicture"-->
-<!--                            aspect-ratio="1"-->
-<!--                    ></v-img>-->
+    <v-card>
+        <v-container
+                fluid
+                grid-list-lg
+        >
+            <v-layout row wrap>
 
-<!--                    <v-card-title primary-title>-->
-<!--                        <div>-->
-<!--                            <h3 class="headline mb-0"> {{ channel.channelName }}</h3>-->
+    <v-flex xs6 v-for="block in blocks" :key="block.number">
+        <v-card color="yellow darken-2" class="white--text">
+            <v-layout>
+                <v-flex xs2>
+                    <v-img
+                            :src="require('../assets/ethereum_blockchain-512.png')"
+                            height="125px"
+                            contain
+                    ></v-img>
+                </v-flex>
+                <v-flex xs10>
+                    <v-card-title primary-title>
+                        <div>
+                            <div class="headline">Block no. {{ block.number }}</div>
 
-<!--                        </div>-->
-<!--                    </v-card-title>-->
+                            <div> <v-icon>fingerprint</v-icon>  Hash: {{ block.hash }} </div>
+                            <div> <v-icon>alarm</v-icon>        Mined:        {{ block.mined }} </div>
+                            <div> <v-icon>person</v-icon>       Miner: {{ block.miner }} </div>
+                            <div> <v-icon>gavel</v-icon>        Transactions: {{ block.transactions }} </div>
+                            <div> <v-icon>storage</v-icon>       Size: {{  block.size }} </div>
 
-<!--                    <v-card-actions>-->
-<!--                        <v-btn flat color="orange" @click="goToStats(channel.id)">Explore</v-btn>  &lt;!&ndash; router :to="stats" &ndash;&gt;-->
-<!--                    </v-card-actions>-->
-<!--                </v-card>-->
-<!--            </v-flex>-->
+                        </div>
+                    </v-card-title>
+                </v-flex>
+            </v-layout>
+            <v-divider light></v-divider>
+            <v-card-actions class="pa-3">
+
+                <v-spacer></v-spacer>
+                <v-btn color="secondary" class="white--text" @click="goToBlock(block.number)">Explore</v-btn>  <!-- router :to="stats" -->
+
+            </v-card-actions>
+        </v-card>
+        </v-flex>
 
 
 
+            </v-layout>
+        </v-container>
+    </v-card>
 
 
-        </v-layout>
-    </v-container>
 </template>
 
 <script>
 
 
-    export default {
-        methods: {
+export default {
+    methods: {
 
-            goToStats: function (channelId)
-            {
-                this.$router.push('/channelstats/' + channelId)
-            }
-        },
-        data()
+        goToBlock: function (blockNumber)
         {
-            return {
-                channels: null,
-                stats: null
-            }
-        },
-        mounted()
-        {
+            this.$router.push('/blocks/' + blockNumber)
+        }
+    },
+    data()
+    {
+        return {
+            // Switch to true if REST API is ready
+            rest: false,
 
+            blocks: [
+                {number: 8803241, hash: "0x7c79b95ad939d97d0c7e1b2d4ce317dadeaad2a2d8fea950eaf844a7d0fe0107", mined: "01.01.2010", miner: "0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c", transactions: 128, size: 26.970},
+                {number: 8803247, hash: "0x6d6be545a5b33013cd9655817d8a450eff34198d29ddf937b5f502ae405b2aed", mined: "01.01.2010", miner: "0x2a65aca4d5fc5b5c859090a6c34d164135398226", transactions: 194, size:31.965},
+                {number: 8803255, hash: "0x761a7faac7cae5ac51776e57c3cd49c9efac17a143b05e949c900c22166bf432", mined: "01.01.2010", miner: "0x829bd824b016326a401d083b33d092293333a830", transactions: 80, size: 20.352}
+                // {number: 123, hash: , mined:, miner:, transactions:, size:},
+
+            ]
+        }
+    },
+    mounted()
+    {
+        if(this.rest)
+        {
             this.$axios
-                .get('https://polish-twitch-stat.appspot.com/channels/findAll')
-                .then(response => (this.channels = response.data))
+                .get('???/blocks') // fill in server URI here
+                .then(response => (this.blocks = response.data))
                 // eslint-disable-next-line no-console
                 .catch(error => console.log(error))
-        },
-        filters: {
-            currencydecimal (value) {
-                return value.toFixed(2)
-            }
-        },
-    }
+        }
+    },
+    filters: {
+        // currencydecimal (value) {
+        //     return value.toFixed(2)
+        // }
+    },
+}
 
 </script>
 
