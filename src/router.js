@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Welcome from './views/Welcome.vue'
-import Transactions from './views/Transactions'
 import transactions from './views/Blocks'
 import BlockDetails from './views/BlockDetails'
+import Transactions from './views/Transactions'
+import TransactionDetails from './views/TransactionDetails'
 
 
 Vue.use(Router);
@@ -31,6 +32,11 @@ export default new Router({
       path: '/transactions',
       name: 'Transactions',
       component: Transactions
+    },
+    {
+      path: '/transactions/:id',
+      name: 'TransactionDetails',
+      component: TransactionDetails
     },
 
 

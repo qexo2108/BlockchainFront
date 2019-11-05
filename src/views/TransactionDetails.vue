@@ -1,14 +1,14 @@
 <template>
   <v-container grid-list-md text-xs-center>
 
-
-    <v-layout row wrap>
+Here you will see transaction details in the future.
+    <!--<v-layout row wrap>
       <v-flex xs12 sm12 md12 lg12 xl12 v-for="transaction in transactions" :key="transaction.number">
 
 
 
 
-        <v-card color="blue darken-2" class="white--text">
+        <v-card color="blue darken-2" class="white&#45;&#45;text">
           <v-layout>
             <v-flex xs6>
               <v-card-title primary-title>
@@ -40,7 +40,7 @@
           <v-card-actions class="pa-3">
 
             <v-spacer></v-spacer>
-            <v-btn color="secondary" class="white--text" @click="goToTransaction(transaction.number)">Explore</v-btn>  <!-- router :to="stats" -->
+            <v-btn color="secondary" class="white&#45;&#45;text" @click="goToTransaction(transaction.number)">Explore</v-btn>  &lt;!&ndash; router :to="stats" &ndash;&gt;
 
           </v-card-actions>
         </v-card>
@@ -48,7 +48,7 @@
 
 
 
-        <!--<v-flex xs6>
+        &lt;!&ndash;<v-flex xs6>
 
 
             <v-card color="blue darken-2" class="white&#45;&#45;text">
@@ -84,7 +84,7 @@
                 </v-card-actions>
             </v-card>
 
-        </v-flex>-->
+        </v-flex>&ndash;&gt;
 
 
 
@@ -92,7 +92,7 @@
 
 
       </v-flex>
-    </v-layout>
+    </v-layout>-->
 
 
 
@@ -126,13 +126,7 @@
       }
     },
 
-    methods: {
 
-      goToTransaction: function (transactionNumber)
-      {
-        this.$router.push('/transactions/' + transactionNumber)
-      }
-    },
 
     mounted()
     {

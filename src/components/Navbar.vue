@@ -3,10 +3,13 @@
 
     <v-toolbar class="green" dense flat app>
       <v-toolbar-side-icon @click="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
-      <v-toolbar-title class="text-uppercase white--text">
+
+      <v-btn flat transparent @click="goHome()">
+      <v-toolbar-title class="text-uppercase white--text" >
         <span class="font-weight-light">Blockchain  </span>
         <span>viewer</span>
       </v-toolbar-title>
+      </v-btn>
 
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
@@ -20,14 +23,14 @@
       <v-spacer></v-spacer>
 
 
-
-      <v-img
+    <v-btn flat transparent icon @click="goHome()">
+      <v-img @click="goHome()"
               :src="require('../assets/Ethereum_logo.svg')"
               class="text-xs-right"
               contain
-              height="40"
+              height="30"
       ></v-img>
-
+    </v-btn>
     </v-toolbar>
 
     <v-navigation-drawer app v-model="drawer" class="secondary">
@@ -58,6 +61,14 @@ export default {
         { icon: 'swap_horiz', text: 'Transactions', route: '/transactions' }
       ],
 
+    }
+  },
+
+  methods: {
+
+    goHome: function ()
+    {
+      this.$router.push('/')
     }
   },
 
