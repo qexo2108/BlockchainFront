@@ -3,7 +3,7 @@
 
 
 
-    <v-card>
+<!--    <v-card>-->
         <v-container
                 fluid
                 grid-list-lg
@@ -49,7 +49,7 @@
 
             </v-layout>
         </v-container>
-    </v-card>
+<!--    </v-card>-->
 
 
 </template>
