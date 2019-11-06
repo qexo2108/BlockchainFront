@@ -37,7 +37,7 @@
       <v-list>
         <v-list-tile v-for="link in links" :key="link.text" router :to="link.route" @click="drawer = !drawer">
           <v-list-tile-action>
-            <v-icon class="white--text">{{ link.icon }}</v-icon>
+            <v-icon class="white--text">{{ link.icon }}.  </v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title class="white--text">{{ link.text }}</v-list-tile-title>
@@ -58,7 +58,8 @@ export default {
       drawer: false,
       links: [
         { icon: 'view_module', text: 'Blocks', route: '/blocks' },
-        { icon: 'swap_horiz', text: 'Transactions', route: '/transactions' }
+        { icon: 'swap_horiz', text: 'Transactions', route: '/transactions' },
+        { icon: 'recent_actors', text: 'Miners', route: '/miners' }
       ],
 
     }

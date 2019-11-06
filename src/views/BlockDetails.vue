@@ -1,8 +1,5 @@
 
 <template>
-
-
-
 <!--    <v-card>-->
         <v-container
                 fluid
@@ -34,17 +31,16 @@
                             <div> <v-icon>gavel</v-icon>        Transactions: {{ block.transactions }} </div>
                             <div> <v-icon>storage</v-icon>       Size: {{  block.size }} </div>
 
+                            <div> <v-icon>input</v-icon>       Parent hash: {{  block.miner }} </div>
+                            <div> <v-icon>local_gas_station</v-icon>       Gas used: {{  block.size }} </div>
+                            <div> <v-icon>local_activity</v-icon>       Reward: {{  block.size }} </div>
+
+
                         </div>
                     </v-card-title>
                 </v-flex>
             </v-layout>
-            <v-divider light></v-divider>
-            <v-card-actions class="pa-3">
 
-                <v-spacer></v-spacer>
-                <v-btn color="secondary" class="white--text" @click="goToBlock(block.number)">Explore</v-btn>  <!-- router :to="stats" -->
-
-            </v-card-actions>
         </v-card>
         </v-flex>
 
@@ -52,64 +48,12 @@
     </v-layout>
 
 
+    <v-flex xs12>
+        <Transactions/>
+    </v-flex>
 
 
-
-
-    <v-spacer></v-spacer>
-        <v-divider></v-divider>
-        <v-spacer></v-spacer>
-
-
-
-            <!--<v-card>
-                <v-card-title>
-                    Nutrition
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                            v-model="search"
-                            append-icon="search"
-                            label="Search"
-                            single-line
-                            hide-details
-                    ></v-text-field>
-                </v-card-title>
-                <v-data-table
-                        :headers="headers"
-                        :items="desserts"
-                        :search="search"
-                >
-                    <template v-slot:items="props">
-                        <td>{{ props.item.name }}</td>
-                        <td class="text-xs-right">{{ props.item.calories }}</td>
-                        <td class="text-xs-right">{{ props.item.fat }}</td>
-                        <td class="text-xs-right">{{ props.item.carbs }}</td>
-                        <td class="text-xs-right">{{ props.item.protein }}</td>
-                        <td class="text-xs-right">{{ props.item.iron }}</td>
-                    </template>
-                    <template v-slot:no-results>
-                        <v-alert :value="true" color="error" icon="warning">
-                            Your search for "{{ search }}" found no results.
-                        </v-alert>
-                    </template>
-                </v-data-table>
-            </v-card>-->
-
-
-
-            <v-flex xs12>
-                <Transactions/>
-            </v-flex>
-
-
-
-            </v-container>
-
-
-
-
-
-
+    </v-container>
 <!--    </v-card>-->
 
 </template>
@@ -145,7 +89,7 @@ export default {
 
 
 
-            search: '',
+            /*search: '',
                 headers: [
             {
                 text: 'Dessert (100g serving)',
@@ -240,7 +184,7 @@ export default {
                 protein: 7,
                 iron: '6%'
             }
-        ]
+        ]*/
 
 
 
