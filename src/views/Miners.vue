@@ -27,10 +27,14 @@
 
                             <div> <v-icon>fingerprint</v-icon>  Hash: {{ miner.hash}} </div>
                             <div> <v-icon>assessment</v-icon>        Number of Transactions:        {{ miner.numberOfTransactions }} </div>
-                            <div> <v-icon>account_balance</v-icon>       Final Balance: {{ miner.finalBalance }} ETH </div>
-                            <div> <v-icon>monetization_on</v-icon>        Total Sent: {{ miner.totalSent }}  ETH</div>
-                            <div> <v-icon>monetization_on</v-icon>      Total Received: {{  miner.totalReceived }} ETH </div>
-                            <div> <v-icon>monetization_on</v-icon>      Total Fees: {{  miner.totalFees }} ETH </div>
+                            <div> <v-icon>account_balance</v-icon>       amount: {{ miner.amount }} ETH </div>
+                            <div> <v-icon>monetization_on</v-icon>        Total Sent: {{ miner.totalSent }}  ETH - TEGO MA NIE BYĆ</div>
+                            <div> <v-icon>monetization_on</v-icon>      Total Received: {{  miner.totalReceived }} ETH - TEGO MA NIE BYĆ</div>
+                            <div> <v-icon>monetization_on</v-icon>      Total Fees: {{  miner.totalFees }} ETH - TEGO MA NIE BYĆ</div>
+                            <div>      type: {{  miner.type }}  </div>
+                            <div>      startDate: {{  miner.startDate }}  </div>
+                            <div>      transactionsHashes: {{  miner.transactionsHashes }} lista transakcji w ktorych bral udzial  </div>
+                            <div>      minedBlocksHashes: {{  miner.minedBlocksHashes }} lista blockow  </div>
 
 
                         </div>
@@ -68,7 +72,7 @@ export default {
     {
         return {
             // Switch to true if REST API is ready
-            rest: false,
+            rest: true,
 
             miners: [
               {hash: "0x7c79b95ad939d97d0c7e1b2d4ce317dadeaad2a2d8fea950eaf844a7d0fe0107", numberOfTransactions: 23488386, finalBalance: 644.456125893380393669, totalSent: 6278743.890634905579106263, totalReceived: 96137.750324762544075523, totalFees: 2242.131899151221233131},
@@ -86,8 +90,8 @@ export default {
         if(this.rest)
         {
             this.$axios
-                .get('???/blocks') // fill in server URI here
-                .then(response => (this.blocks = response.data))
+                .get('http://localhost:51419/api/blockchain/clients') // fill in server URI here
+                .then(response => (this.miners = response.data))
                 // eslint-disable-next-line no-console
                 .catch(error => console.log(error))
         }

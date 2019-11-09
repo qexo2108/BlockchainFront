@@ -19,8 +19,12 @@
 
               <v-spacer></v-spacer>
 
-            <div> <v-icon>alarm</v-icon>            Time:   {{ transaction.time }} </div>
-            <div> <v-icon>monetization_on</v-icon>  Amount: {{  transaction.amount }} ETH </div>
+            <div> <v-icon>alarm</v-icon>            Time:   {{ transaction.transactionDate }} </div>
+            <div> <v-icon>monetization_on</v-icon>  Amount: {{  transaction.moneyAmount }} ETH </div>
+            <div>   gasAmount: {{  transaction.gasAmount }}  </div>
+            <div>   sourceClientHash: {{  transaction.sourceClientHash }}  </div>
+            <div>   destinationClientHash: {{  transaction.destinationClientHash }}  </div>
+            <div>   blockHash: {{  transaction.blockHash }}  </div>
 <!--            </v-flex>-->
 
           </v-layout>
@@ -28,7 +32,7 @@
           <v-card-actions class="pa-3">
 
             <v-spacer></v-spacer>
-            <v-btn color="secondary" class="white--text" @click="goToTransaction(transaction.number)">Explore</v-btn>  <!-- router :to="stats" -->
+            <v-btn color="secondary" class="white--text" @click="goToTransaction(transaction.hash)">Explore</v-btn>  <!-- router :to="stats" -->
 
           </v-card-actions>
         </v-card>

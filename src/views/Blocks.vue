@@ -23,13 +23,21 @@
                 <v-flex xs10>
                     <v-card-title primary-title>
                         <div>
-                            <div class="headline">Block no. {{ block.number }}</div>
+                            <div class="headline">Block no. {{ block.id }}</div>
 
                             <div> <v-icon>fingerprint</v-icon>  Hash: {{ block.hash }} </div>
-                            <div> <v-icon>alarm</v-icon>        Mined:        {{ block.mined }} </div>
-                            <div> <v-icon>person</v-icon>       Miner: {{ block.miner }} </div>
-                            <div> <v-icon>gavel</v-icon>        Transactions: {{ block.transactions }} </div>
+                            <div> <v-icon>alarm</v-icon>        Mined:        {{ block.minedDate }} </div>
+                            <div> <v-icon>person</v-icon>       Miner: {{ block.minerHash }} </div>
+                            <div> <v-icon>gavel</v-icon>        Transactions: {{ block.transactionCount }} </div>
                             <div> <v-icon>storage</v-icon>       Size: {{  block.size }} </div>
+                            <div>      gasAmount: {{  block.gasAmount }} </div>
+                            <div>      awardForMining: {{  block.awardForMining }} </div>
+                            <div>      totalSentAmount: {{  block.totalSentAmount }} </div>
+                            <div>      totalReceivedAmount: {{  block.totalReceivedAmount }} </div>
+                            <div>      totalBalance: {{  block.totalBalance }} </div>
+                            <div>      parentHash: {{  block.parentHash }} </div>
+                            <div>      childHash: {{  block.childHash }} </div>
+                            <div>      transactionsHashes: {{  block.transactionsHashes }} hasze transakcji </div>
 
                         </div>
                     </v-card-title>
@@ -39,7 +47,7 @@
             <v-card-actions class="pa-3">
 
                 <v-spacer></v-spacer>
-                <v-btn color="secondary" class="white--text" @click="goToBlock(block.number)">Explore</v-btn>  <!-- router :to="stats" -->
+                <v-btn color="secondary" class="white--text" @click="goToBlock(block.hash)">Explore</v-btn>  <!-- router :to="stats" -->
 
             </v-card-actions>
         </v-card>
@@ -69,7 +77,7 @@ export default {
     {
         return {
             // Switch to true if REST API is ready
-            rest: false,
+            rest: true,
 
             blocks: [
                 {number: 8803241, hash: "0x7c79b95ad939d97d0c7e1b2d4ce317dadeaad2a2d8fea950eaf844a7d0fe0107", mined: "01.01.2010", miner: "0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c", transactions: 128, size: 26.970},
@@ -88,10 +96,10 @@ export default {
         if(this.rest)
         {
             this.$axios
-                .get('???/blocks') // fill in server URI here
-                .then(response => (this.blocks = response.data))
+                .get('http://localhost:51419/api/blockchain/blocks') // fill in server URI here
+                .then(response => {(this.blocks = response.data); console.log(this.blocks);})
                 // eslint-disable-next-line no-console
-                .catch(error => console.log(error))
+                .catch(error => console.log("DUPA" + error))
         }
     },
     filters: {
