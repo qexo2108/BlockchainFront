@@ -59,7 +59,7 @@ export default {
       links: [
         { icon: 'view_module', text: 'Blocks', route: '/blocks' },
         { icon: 'swap_horiz', text: 'Transactions', route: '/transactions' },
-        { icon: 'recent_actors', text: 'Miners', route: '/miners' }
+        { icon: 'recent_actors', text: 'Clients', route: '/clients' }
       ],
 
     }

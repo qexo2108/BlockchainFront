@@ -5,7 +5,7 @@ import transactions from './views/Blocks'
 import BlockDetails from './views/BlockDetails'
 import Transactions from './views/Transactions'
 import TransactionDetails from './views/TransactionDetails'
-import Miners from './views/Miners'
+import Clients from './views/Clients'
 
 
 Vue.use(Router);
@@ -40,9 +40,9 @@ export default new Router({
       component: TransactionDetails
     },
     {
-      path: '/miners',
-      name: 'Miners',
-      component: Miners
+      path: '/clients',
+      name: 'Clients',
+      component: Clients
     },
 
 

@@ -19,8 +19,9 @@
             </v-flex>
             <v-flex xs3>
               <v-spacer></v-spacer>
-              <div> <v-icon>alarm</v-icon>            Time:   {{ transaction.time }} </div>
-              <div> <v-icon>monetization_on</v-icon>  Amount: {{  transaction.amount }} ETH </div>
+
+
+
             </v-flex>
           </v-layout>
 
@@ -29,7 +30,7 @@
 
           <v-layout row wrap>
             <v-flex xs5>
-              <div> {{ transaction.from }} </div>
+              <div> <v-icon> account_balance_wallet </v-icon>  {{ transaction.sourceClientHash }} </div>
             </v-flex>
 
             <v-flex xs2>
@@ -37,7 +38,7 @@
             </v-flex>
 
             <v-flex xs5>
-              <div> {{ transaction.to }} </div>
+              <div> <v-icon> account_balance_wallet </v-icon> {{ transaction.destinationClientHash }} </div>
 
             </v-flex>
           </v-layout>
@@ -46,12 +47,18 @@
 
           <v-layout row wrap>
             <v-flex xs6>
-              <div> <v-icon>confirmation_number</v-icon> Status: {{ transaction.status }} </div>
-              <div> <v-icon>assignment_turned_in</v-icon> Confirmations: {{ transaction.confirmations }} </div>
+<!--              <div> <v-icon>confirmation_number</v-icon> Status: {{ transaction.status }} </div>-->
+<!--              <div> <v-icon>assignment_turned_in</v-icon> Confirmations: {{ transaction.confirmations }} </div>-->
+              <div> <v-icon>alarm</v-icon>            Time:   {{ transaction.transactionDate }} </div>
+              <div> <v-icon>monetization_on</v-icon>  Amount: {{  transaction.moneyAmount }} ETH </div>
+
+
             </v-flex>
 
             <v-flex xs6>
-              <div> <v-icon>local_gas_station</v-icon> Gas price: {{ transaction.gasPrice }} </div>
+              <div> <v-icon>local_gas_station</v-icon> Gas price: {{ transaction.gasAmount }} </div>
+              <div> <v-icon> border_all </v-icon>  Block hash: {{  transaction.blockHash }} </div>
+
             </v-flex>
           </v-layout>
 
@@ -77,8 +84,7 @@
       return {
           games: null,
 
-        transaction:
-            {hash: "0x7c79b95ad939d97d0c7e1b2d4ce317dadeaad2a2d8fea950eaf844a7d0fe0107", time: "01.01.2010 17:44", amount: "0.04491600", status: "Unconfirmed", confirmations: 0, from: "0xab5c66752a9e8167967685f1450532fb96d5d24f", to: "0xab5c66752a9e8167967685f1450532fb96d5d24f", gasPrice: "\n" + "0.00000004"}
+        transaction: {}
 
       }
     },
@@ -89,8 +95,8 @@
     {
 
       this.$axios
-              .get('https://polish-twitch-stat.appspot.com/games/findAll')
-              .then(response => (this.games = response.data))
+              .get('http://localhost:51419/api/blockchain/transactions/' + this.$route.params.id)
+              .then(response => (this.transaction = response.data))
               // eslint-disable-next-line no-console
               .catch(error => console.log(error))
     },
