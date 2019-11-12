@@ -85,7 +85,7 @@ export default {
       this.myFetch(this);
         this.$intervalId = setInterval(function(context)
         {
-          console.log("ReloadTransactions");
+          // console.log("ReloadTransactions");
           context.myFetch(context);
         }, 1000, this);
     },
