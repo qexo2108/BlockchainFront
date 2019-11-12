@@ -3,7 +3,7 @@
 
 
     <v-layout row wrap>
-      <v-flex xs12  v-for="transaction in transactions" :key="transaction.hash">
+      <v-flex xs12 v-for="transaction in transactions" :key="transaction.hash">
 <!--        sm12 md12 lg12 xl12-->
 
 
@@ -51,7 +51,7 @@
 
 <script>
 
-  import { address, transactionIntervalId } from '../main'
+import {address} from '../main'
 
 export default {
     data()

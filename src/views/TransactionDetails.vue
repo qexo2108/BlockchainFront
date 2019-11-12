@@ -129,7 +129,7 @@ export default {
         this.myFetch(this);
         this.$intervalId = setInterval(function(context)
         {
-            console.log("ReloadTransDet");
+            // console.log("ReloadTransDet");
             context.myFetch(context);
         }, 1000, this);
         },

@@ -1,16 +1,12 @@
 
 <template>
-
-
-
-<!--    <v-card>-->
-        <v-container
+     <v-container
                 fluid
                 grid-list-lg
         >
             <v-layout row wrap>
 
-    <v-flex xs12 sm12 md6 lg6 xl6 v-for="block in blocks" :key="block.id">
+    <v-flex xs12 md6 xl4 v-for="block in blocks" :key="block.hash">
         <v-card color="yellow darken-2" class="white--text">
             <v-layout>
                 <v-flex xs2>
@@ -23,8 +19,6 @@
                 <v-flex xs10>
                     <v-card-title primary-title>
                         <div>
-                            <div class="headline">Block no. {{ block.id }}</div>
-
                             <div> <v-icon>fingerprint</v-icon>  Hash: {{ block.hash }} </div>
                             <div> <v-icon>alarm</v-icon>        Mined:        {{ block.minedDate }} </div>
                             <div>
@@ -56,9 +50,6 @@
 
             </v-layout>
         </v-container>
-<!--    </v-card>-->
-
-
 </template>
 
 <script>
@@ -98,8 +89,8 @@ export default {
         this.myFetch(this);
         this.$intervalId = setInterval(function(context)
         {
-            console.log("ReloadBlocks");
-            context.myFetch(context);
+            // console.log("ReloadBlocks");
+            context. myFetch(context);
         }, 1000, this);
     },
     destroyed()

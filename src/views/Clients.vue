@@ -1,16 +1,12 @@
 
 <template>
-
-
-
-<!--    <v-card>-->
         <v-container
                 fluid
                 grid-list-lg
         >
             <v-layout row wrap>
 
-    <v-flex xs12 sm12 md6 lg6 xl6 v-for="client in clients" :key="client.number">
+    <v-flex xs12 sm12 md6 lg6 xl4 v-for="client in clients" :key="client.number">
         <v-card color="red darken-2" class="white--text">
             <v-layout>
                 <v-flex xs2>
@@ -30,16 +26,11 @@
                 <v-flex xs10>
                     <v-card-title primary-title>
                         <div>
-<!--                            <div class="headline">Miner no. {{ block.number }}</div>-->
-
                             <div> <v-icon>fingerprint</v-icon>  Hash:  {{ client.hash}} </div>
                             <div> <v-icon>assessment</v-icon>        Number of Transactions:        {{ client.transactionsCount }} </div>
                             <div> <v-icon>account_balance</v-icon>       amount: {{ client.amount }} ETH </div>
                             <div>        </div>
                             <div> <v-icon>alarm</v-icon>      Created: {{  client.startDate }}  </div>
-<!--                            <div>      minedBlocksHashes: {{  client.minedBlocksHashes }} lista blockow  </div>-->
-
-
                         </div>
                     </v-card-title>
                 </v-flex>
@@ -55,9 +46,6 @@
 
             </v-layout>
         </v-container>
-<!--    </v-card>-->
-
-
 </template>
 
 <script>
@@ -92,7 +80,7 @@ export default {
     this.myFetch(this);
     this.$intervalId = setInterval(function(context)
     {
-      console.log("ReloadClient");
+      // console.log("ReloadClient");
       context.myFetch(context);
     }, 1000, this);
   },

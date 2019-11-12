@@ -10,7 +10,7 @@
 
 
     <v-flex xs3></v-flex>
-    <v-flex xs6>
+    <v-flex xs12 sm12 md6>
         <v-card color="yellow darken-2" class="white--text">
             <v-layout>
                 <v-flex xs2>
@@ -23,11 +23,17 @@
                 <v-flex xs10>
                     <v-card-title primary-title>
                         <div>
-                            <div class="headline"> Block {{ block.hash }} </div>
-                            <v-spacer></v-spacer>
+
 
                             <div> <v-icon>fingerprint</v-icon>  Hash: {{ block.hash }} </div>
                             <div> <v-icon>alarm</v-icon>        Mined:        {{ block.minedDate }} </div>
+                            <div>
+                                <v-icon>person</v-icon>
+                                Miner:
+                                <v-btn small flat dark transparent @click="goToClient(block.minerHash)">
+                                    {{ block.minerHash }}
+                                </v-btn>
+                            </div>
                             <div> <v-icon>gavel</v-icon>        Transactions: {{ block.transactionCount }} </div>
                             <div> <v-icon>storage</v-icon>       Size: {{  block.size }} </div>
 
@@ -64,15 +70,7 @@
 
 
         <v-flex xs3></v-flex>
-<!--    </v-layout>-->
 
-
-<!--    <v-flex xs12>-->
-
-<!--            <v-divider> </v-divider>-->
-
-
-<!--        <v-layout row wrap>-->
             <v-flex xs12  v-for="transaction in block.transactions" :key="transaction.hash">
                 <!--        sm12 md12 lg12 xl12-->
 
@@ -112,12 +110,8 @@
         </v-layout>
 
 
-<!--    </v-flex>-->
-
 
     </v-container>
-<!--    </v-card>-->
-
 </template>
 
 
@@ -136,6 +130,10 @@ export default {
         goToBlock: function (blockNumber) {
             this.$router.push('/blocks/' + blockNumber)
             this.reloadPage();
+        },
+        goToClient: function (clientNumber)
+        {
+            this.$router.push('/clients/' + clientNumber)
         },
         reloadPage: function () {
             window.location.reload()
@@ -166,7 +164,7 @@ export default {
     this.myFetch(this);
     this.$intervalId = setInterval(function(context)
     {
-      console.log("ReloadTransDet");
+      // console.log("ReloadTransDet");
       context.myFetch(context);
     }, 1000, this);
   },
