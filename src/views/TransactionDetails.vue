@@ -64,7 +64,13 @@
 
             <v-flex xs6>
               <div> <v-icon>local_gas_station</v-icon> Gas price: {{ transaction.gasAmount }} </div>
-              <div> <v-icon> border_all </v-icon>  Block hash: {{  transaction.blockHash }} </div>
+              <div> <v-icon>check</v-icon>  Status: <span v-if="transaction.blockHash === null">Unconfirmed</span> <span v-else>Confirmed</span>  </div>
+              <div v-if="transaction.blockHash != null"> <v-icon> border_all </v-icon>
+                  <v-btn small flat dark transparent @click="goToBlock(transaction.blockHash)">
+                      {{ transaction.blockHash }}
+                  </v-btn>
+              </div>
+
 
             </v-flex>
           </v-layout>
@@ -93,7 +99,19 @@ export default {
       goToClient: function (clientNumber)
       {
         this.$router.push('/clients/' + clientNumber)
-      }
+      },
+      myFetch: function(context)
+      {
+        context.$axios
+          .get(address + 'transactions/' + this.$route.params.id)
+          .then(response => (context.transaction = response.data))
+          // eslint-disable-next-line no-console
+          .catch(error => console.log(error));
+      },
+        goToBlock: function (blockNumber)
+        {
+            this.$router.push('/blocks/' + blockNumber)
+        },
     },
 
     data()
@@ -106,16 +124,19 @@ export default {
       }
     },
 
-
-
     mounted()
     {
-        this.$axios
-            .get(address + 'transactions/' + this.$route.params.id)
-            .then(response => (this.transaction = response.data))
-            // eslint-disable-next-line no-console
-            .catch(error => console.log(error))
-    },
+        this.myFetch(this);
+        this.$intervalId = setInterval(function(context)
+        {
+            console.log("ReloadTransDet");
+            context.myFetch(context);
+        }, 1000, this);
+        },
+    destroyed()
+    {
+        clearInterval(this.$intervalId);
+    }
 
 
   }

@@ -22,6 +22,8 @@
                     <v-spacer></v-spacer>
                     <div> <v-icon>alarm</v-icon>            Time:   {{ transaction.transactionDate }} </div>
                     <div> <v-icon>monetization_on</v-icon>  Amount: {{  transaction.moneyAmount }} ETH </div>
+                    <div> <v-icon>check</v-icon>  Status: <span v-if="transaction.blockHash === null">Unconfirmed</span> <span v-else>Confirmed</span>  </div>
+
 
 
                 </v-flex>
@@ -49,14 +51,15 @@
 
 <script>
 
-import {address} from '../main'
+  import { address, transactionIntervalId } from '../main'
 
 export default {
     data()
     {
         return {
 
-        transactions: []
+        transactions: [],
+          intervalId: 0
 
         }
     },
@@ -65,17 +68,32 @@ export default {
         goToTransaction: function (transactionNumber)
         {
             this.$router.push('/transactions/' + transactionNumber)
+        },
+        myFetch: function(context)
+        {
+          context.$axios
+            .get(address + 'transactions')
+            .then(response => (context.transactions = response.data))
+            // eslint-disable-next-line no-console
+            .catch(error => console.log(error));
         }
+
     },
 
     mounted()
     {
-        this.$axios
-            .get(address + 'transactions')
-            .then(response => (this.transactions = response.data))
-            // eslint-disable-next-line no-console
-            .catch(error => console.log(error))
+      this.myFetch(this);
+        this.$intervalId = setInterval(function(context)
+        {
+          console.log("ReloadTransactions");
+          context.myFetch(context);
+        }, 1000, this);
     },
+    destroyed()
+    {
+      clearInterval(this.$intervalId);
+    }
+
 
 
 }

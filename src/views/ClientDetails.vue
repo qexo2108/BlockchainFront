@@ -71,6 +71,15 @@ export default {
         {
             this.$router.push('/blocks/' + blockNumber)
         }*/
+
+      myFetch: function(context)
+      {
+        context.$axios
+          .get(address + 'clients/' + this.$route.params.id)
+          .then(response => (context.client = response.data))
+          // eslint-disable-next-line no-console
+          .catch(error => console.log(error));
+      }
     },
     data()
     {
@@ -78,14 +87,19 @@ export default {
             client: {}
         }
     },
-    mounted()
+  mounted()
+  {
+    this.myFetch(this);
+    this.$intervalId = setInterval(function(context)
     {
-        this.$axios
-            .get(address + 'clients/' + this.$route.params.id)
-            .then(response => (this.client = response.data))
-            // eslint-disable-next-line no-console
-            .catch(error => console.log(error))
-    }
+      console.log("ReloadClientDet");
+      context.myFetch(context);
+    }, 1000, this);
+  },
+  destroyed()
+  {
+    clearInterval(this.$intervalId);
+  }
 
 }
 

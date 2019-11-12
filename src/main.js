@@ -10,7 +10,7 @@ Vue.use(VueAxios);
 
 Vue.config.productionTip = false;
 
-const ip = 'localhost'
+const ip = '192.168.0.206'
 const port = 51419
 export const address = 'http://' + ip + ':' + port + '/api/blockchain/'
 

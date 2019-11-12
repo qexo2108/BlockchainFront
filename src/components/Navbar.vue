@@ -24,8 +24,7 @@
 
 
     <v-btn flat transparent icon @click="goHome()">
-      <v-img @click="goHome()"
-              :src="require('../assets/Ethereum_logo.svg')"
+      <v-img  :src="require('../assets/Ethereum_logo.svg')"
               class="text-xs-right"
               contain
               height="30"

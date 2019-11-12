@@ -23,8 +23,8 @@
                 <v-flex xs10>
                     <v-card-title primary-title>
                         <div>
-
-                            <div class="headline">Block no. {{ block.number }}</div>
+                            <div class="headline"> Block {{ block.hash }} </div>
+                            <v-spacer></v-spacer>
 
                             <div> <v-icon>fingerprint</v-icon>  Hash: {{ block.hash }} </div>
                             <div> <v-icon>alarm</v-icon>        Mined:        {{ block.minedDate }} </div>
@@ -38,12 +38,18 @@
                             <div>  <v-icon>remove_circle</v-icon>    Total sent amount: {{  block.totalSentAmount }} </div>
                             <div>  <v-icon>add_circle</v-icon>    Total received amount: {{  block.totalReceivedAmount }} </div>
                             <div> <v-icon>monetization_on</v-icon>     Total balance: {{  block.totalBalance }} </div>
-                            <div> <v-icon>fingerprint</v-icon>     Parent hash: {{  block.parentHash }} </div>
-                            <div> <v-icon>fingerprint</v-icon>     Child hash: {{  block.childHash }} </div>
-                            <div>   <!-- TODO: -->   Transactions hashes: {{  block.transactionsHashes }} </div>
-
-
+                            <div> <v-icon>fingerprint</v-icon> Parent hash:
+                                <v-btn small flat dark transparent @click="goToBlock(block.parentHash)">
+                                    {{ block.parentHash }}
+                                </v-btn>
+                            </div>
+                            <div> <v-icon>fingerprint</v-icon>     Child hash:
+                                <v-btn small flat dark transparent @click="goToBlock(block.childHash)">
+                                    {{ block.childHash }}
+                                </v-btn>
+                            </div>
                         </div>
+
                     </v-card-title>
                     <v-card-actions></v-card-actions>
                 </v-flex>
@@ -67,7 +73,7 @@
 
 
 <!--        <v-layout row wrap>-->
-            <v-flex xs12  v-for="transaction in transactions" :key="transaction.hash">
+            <v-flex xs12  v-for="transaction in block.transactions" :key="transaction.hash">
                 <!--        sm12 md12 lg12 xl12-->
 
 
@@ -86,6 +92,8 @@
                             <v-spacer></v-spacer>
                             <div> <v-icon>alarm</v-icon>            Time:   {{ transaction.transactionDate }} </div>
                             <div> <v-icon>monetization_on</v-icon>  Amount: {{  transaction.moneyAmount }} ETH </div>
+                            <div> <v-icon>check</v-icon>  Status: <span v-if="transaction.blockHash === null">Unconfirmed</span> <span v-else>Confirmed</span>  </div>
+
 
 
                         </v-flex>
@@ -122,7 +130,24 @@ import {address} from '../main'
 
 export default {
     methods: {
-
+        goToTransaction: function (transactionNumber) {
+            this.$router.push('/transactions/' + transactionNumber)
+        },
+        goToBlock: function (blockNumber) {
+            this.$router.push('/blocks/' + blockNumber)
+            this.reloadPage();
+        },
+        reloadPage: function () {
+            window.location.reload()
+        },
+      myFetch: function(context)
+      {
+        context.$axios
+          .get(address + 'blocks/' + this.$route.params.id)
+          .then(response => (context.block = response.data))
+          // eslint-disable-next-line no-console
+          .catch(error => console.log(error));
+      }
     },
 
     components: {
@@ -136,20 +161,19 @@ export default {
             transactions:[]
         }
     },
-    mounted()
+  mounted()
+  {
+    this.myFetch(this);
+    this.$intervalId = setInterval(function(context)
     {
-        this.$axios
-            .get(address + 'blocks/' + this.$route.params.id)
-            .then(response => (this.block = response.data))
-            // eslint-disable-next-line no-console
-            .catch(error => console.log(error))
-
-        this.$axios
-            .get(address + 'transactions')
-            .then(response => (this.transactions = response.data))
-            // eslint-disable-next-line no-console
-            .catch(error => console.log(error))
-    }
+      console.log("ReloadTransDet");
+      context.myFetch(context);
+    }, 1000, this);
+  },
+  destroyed()
+  {
+    clearInterval(this.$intervalId);
+  }
 }
 
 </script>

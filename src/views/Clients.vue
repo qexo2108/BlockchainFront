@@ -70,22 +70,36 @@ export default {
         goToClient: function (clientNumber)
         {
             this.$router.push('/clients/' + clientNumber)
-        }
+        },
+      myFetch: function(context)
+      {
+        context.$axios
+          .get(address + 'clients')
+          .then(response => (context.clients = response.data))
+          // eslint-disable-next-line no-console
+          .catch(error => console.log(error));
+      }
     },
     data()
     {
         return {
-            clients: []
+            clients: [],
+            intervalId: 0
         }
     },
-    mounted()
+  mounted()
+  {
+    this.myFetch(this);
+    this.$intervalId = setInterval(function(context)
     {
-        this.$axios
-            .get(address + 'clients')
-            .then(response => (this.clients = response.data))
-            // eslint-disable-next-line no-console
-            .catch(error => console.log(error))
-    }
+      console.log("ReloadClient");
+      context.myFetch(context);
+    }, 1000, this);
+  },
+  destroyed()
+  {
+    clearInterval(this.$intervalId);
+  }
 
 }
 
