@@ -10,7 +10,7 @@
         >
             <v-layout row wrap>
 
-    <v-flex xs12 sm12 md6 lg6 xl6 v-for="client in clients" :key="client.number">
+    <v-flex xs12 sm12 md6 lg6 xl6>
         <v-card color="red darken-2" class="white--text">
             <v-layout>
                 <v-flex xs2>
@@ -32,7 +32,7 @@
                         <div>
 <!--                            <div class="headline">Miner no. {{ block.number }}</div>-->
 
-                            <div> <v-icon>fingerprint</v-icon>  Hash:  {{ client.hash}} </div>
+                            <div> <v-icon>fingerprint</v-icon>  Hash: {{ client.hash}} </div>
                             <div> <v-icon>assessment</v-icon>        Number of Transactions:        {{ client.transactionsCount }} </div>
                             <div> <v-icon>account_balance</v-icon>       amount: {{ client.amount }} ETH </div>
                             <div>        </div>
@@ -46,7 +46,7 @@
             </v-layout>
 
             <v-card-actions class="pa-3">
-                <v-btn color="secondary" class="white--text" @click="goToClient(client.hash)">Explore</v-btn>  <!-- router :to="stats" -->
+<!--                <v-btn color="secondary" class="white&#45;&#45;text" @click="goToBlock(block.number)">Explore</v-btn>  &lt;!&ndash; router :to="stats" &ndash;&gt;-->
             </v-card-actions>
         </v-card>
         </v-flex>
@@ -67,10 +67,10 @@ import {address} from '../main'
 export default {
     methods: {
 
-        goToClient: function (clientNumber)
+        /*goToBlock: function (blockNumber)
         {
-            this.$router.push('/clients/' + clientNumber)
-        }
+            this.$router.push('/blocks/' + blockNumber)
+        }*/
     },
     data()
     {
@@ -78,7 +78,7 @@ export default {
             // Switch to true if REST API is ready
             rest: true,
 
-            clients: []
+            client: {}
 
         }
     },
@@ -87,8 +87,8 @@ export default {
         if(this.rest)
         {
             this.$axios
-                .get(address + 'clients')
-                .then(response => (this.clients = response.data))
+                .get(address + 'clients/' + this.$route.params.id)
+                .then(response => (this.client = response.data))
                 // eslint-disable-next-line no-console
                 .catch(error => console.log(error))
         }

@@ -6,6 +6,8 @@ import BlockDetails from './views/BlockDetails'
 import Transactions from './views/Transactions'
 import TransactionDetails from './views/TransactionDetails'
 import Clients from './views/Clients'
+import ClientDetails from './views/ClientDetails'
+
 
 
 Vue.use(Router);
@@ -44,6 +46,12 @@ export default new Router({
       name: 'Clients',
       component: Clients
     },
+    {
+      path: '/clients/:id',
+      name: 'ClientDetails',
+      component: ClientDetails
+    },
+
 
 
 

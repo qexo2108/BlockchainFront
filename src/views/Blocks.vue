@@ -27,7 +27,13 @@
 
                             <div> <v-icon>fingerprint</v-icon>  Hash: {{ block.hash }} </div>
                             <div> <v-icon>alarm</v-icon>        Mined:        {{ block.minedDate }} </div>
-                            <div> <v-icon>person</v-icon>       Miner: {{ block.minerHash }} </div>
+                            <div>
+                                <v-icon>person</v-icon>
+                                Miner:
+                                <v-btn small flat dark transparent @click="goToClient(block.minerHash)">
+                                    {{ block.minerHash }}
+                                </v-btn>
+                            </div>
                             <div> <v-icon>gavel</v-icon>        Transactions: {{ block.transactionCount }} </div>
                             <div> <v-icon>storage</v-icon>       Size: {{  block.size }} </div>
 
@@ -57,6 +63,7 @@
 
 <script>
 
+import {address} from '../main'
 
 export default {
     methods: {
@@ -64,6 +71,11 @@ export default {
         goToBlock: function (blockNumber)
         {
             this.$router.push('/blocks/' + blockNumber)
+        },
+
+        goToClient: function (clientNumber)
+        {
+            this.$router.push('/clients/' + clientNumber)
         }
     },
     data()
@@ -89,7 +101,8 @@ export default {
         if(this.rest)
         {
             this.$axios
-                .get('http://localhost:51419/api/blockchain/blocks') // fill in server URI here
+          // 'http://localhost:51419/api/blockchain/blocks'
+                .get(address + 'blocks') // fill in server URI here
                 .then(response => {(this.blocks = response.data); console.log(this.blocks);})
                 // eslint-disable-next-line no-console
                 .catch(error => console.log("DUPA" + error))

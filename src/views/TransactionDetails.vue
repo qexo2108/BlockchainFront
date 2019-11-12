@@ -30,15 +30,22 @@
 
           <v-layout row wrap>
             <v-flex xs5>
-              <div> <v-icon> account_balance_wallet </v-icon>  {{ transaction.sourceClientHash }} </div>
+              <v-icon> account_balance_wallet </v-icon>
+              <v-btn text flat dark transparent @click="goToClient(transaction.sourceClientHash)">
+                <div>   {{ transaction.sourceClientHash }} </div>
+              </v-btn>
             </v-flex>
 
             <v-flex xs2>
               <v-icon>arrow_forward</v-icon>
             </v-flex>
 
+
             <v-flex xs5>
-              <div> <v-icon> account_balance_wallet </v-icon> {{ transaction.destinationClientHash }} </div>
+               <v-icon> account_balance_wallet </v-icon>
+              <v-btn  text flat dark transparent @click="goToClient(transaction.destinationClientHash)">
+                <div>  {{ transaction.destinationClientHash }} </div>
+              </v-btn>
 
             </v-flex>
           </v-layout>
@@ -78,7 +85,17 @@
 
 <script>
 
-  export default {
+import {address} from '../main'
+
+export default {
+    methods: {
+
+      goToClient: function (clientNumber)
+      {
+        this.$router.push('/clients/' + clientNumber)
+      }
+    },
+
     data()
     {
       return {
@@ -95,7 +112,7 @@
     {
 
       this.$axios
-              .get('http://localhost:51419/api/blockchain/transactions/' + this.$route.params.id)
+              .get(address + 'transactions/' + this.$route.params.id)
               .then(response => (this.transaction = response.data))
               // eslint-disable-next-line no-console
               .catch(error => console.log(error))

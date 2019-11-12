@@ -49,41 +49,40 @@
 
 <script>
 
-  export default {
-    data()
-    {
-      return {
+import {address} from '../main'
 
-        transactions: []
+export default {
+data()
+{
+  return {
 
-      }
-    },
-
-    methods: {
-
-      goToTransaction: function (transactionNumber)
-      {
-        this.$router.push('/transactions/' + transactionNumber)
-      }
-    },
-
-    mounted()
-    {
-
-      this.$axios
-              .get('http://localhost:51419/api/blockchain/transactions')
-              .then(response => (this.transactions = response.data))
-              // eslint-disable-next-line no-console
-              .catch(error => console.log(error))
-    },
-
-
-
-
+    transactions: []
 
   }
+},
+
+methods: {
+
+  goToTransaction: function (transactionNumber)
+  {
+    this.$router.push('/transactions/' + transactionNumber)
+  }
+},
+
+mounted()
+{
+
+  this.$axios
+          .get(address + 'transactions')
+          .then(response => (this.transactions = response.data))
+          // eslint-disable-next-line no-console
+          .catch(error => console.log(error))
+},
+
+
+
+
+
+}
+
 </script>
-
-<style>
-
-</style>
