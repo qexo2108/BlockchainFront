@@ -28,7 +28,7 @@
                         <div>
                             <div> <v-icon>fingerprint</v-icon>  Hash:  {{ client.hash}} </div>
                             <div> <v-icon>assessment</v-icon>        Number of Transactions:        {{ client.transactionsCount }} </div>
-                            <div> <v-icon>account_balance</v-icon>       amount: {{ client.amount }} ETH </div>
+                            <div> <v-icon>account_balance</v-icon>       Amount: {{ client.amount }} ETH </div>
                             <div>        </div>
                             <div> <v-icon>alarm</v-icon>      Created: {{  client.startDate }}  </div>
                         </div>
