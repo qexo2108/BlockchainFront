@@ -132,33 +132,25 @@ export default {
     data()
     {
         return {
-            // Switch to true if REST API is ready
-            rest: true,
             block: {},
             transactions:[]
         }
     },
     mounted()
     {
-        if(this.rest)
-        {
-            this.$axios
-                .get(address + 'blocks/' + this.$route.params.id)
-                .then(response => (this.block = response.data))
-                // eslint-disable-next-line no-console
-                .catch(error => console.log(error))
+        this.$axios
+            .get(address + 'blocks/' + this.$route.params.id)
+            .then(response => (this.block = response.data))
+            // eslint-disable-next-line no-console
+            .catch(error => console.log(error))
 
-            this.$axios
+        this.$axios
             .get(address + 'transactions')
             .then(response => (this.transactions = response.data))
             // eslint-disable-next-line no-console
             .catch(error => console.log(error))
-        }
     }
 }
 
 </script>
 
-<style scoped>
-
-</style>

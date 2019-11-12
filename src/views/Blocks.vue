@@ -81,42 +81,18 @@ export default {
     data()
     {
         return {
-            // Switch to true if REST API is ready
-            rest: true,
-
             blocks: []
-/*                {number: 8803241, hash: "0x7c79b95ad939d97d0c7e1b2d4ce317dadeaad2a2d8fea950eaf844a7d0fe0107", mined: "01.01.2010", miner: "0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c", transactions: 128, size: 26.970},
-                {number: 8803247, hash: "0x6d6be545a5b33013cd9655817d8a450eff34198d29ddf937b5f502ae405b2aed", mined: "01.01.2010", miner: "0x2a65aca4d5fc5b5c859090a6c34d164135398226", transactions: 194, size:31.965},
-                {number: 8803255, hash: "0x761a7faac7cae5ac51776e57c3cd49c9efac17a143b05e949c900c22166bf432", mined: "01.01.2010", miner: "0x829bd824b016326a401d083b33d092293333a830", transactions: 80, size: 20.352},
-                {number: 8803255, hash: "0x761a7faac7cae5ac51776e57c3cd49c9efac17a143b05e949c900c22166bf432", mined: "01.01.2010", miner: "0x829bd824b016326a401d083b33d092293333a830", transactions: 80, size: 20.352},
-                {number: 8803255, hash: "0x761a7faac7cae5ac51776e57c3cd49c9efac17a143b05e949c900c22166bf432", mined: "01.01.2010", miner: "0x829bd824b016326a401d083b33d092293333a830", transactions: 80, size: 20.352},
-                {number: 8803255, hash: "0x761a7faac7cae5ac51776e57c3cd49c9efac17a143b05e949c900c22166bf432", mined: "01.01.2010", miner: "0x829bd824b016326a401d083b33d092293333a830", transactions: 80, size: 20.352},
-                {number: 8803255, hash: "0x761a7faac7cae5ac51776e57c3cd49c9efac17a143b05e949c900c22166bf432", mined: "01.01.2010", miner: "0x829bd824b016326a401d083b33d092293333a830", transactions: 80, size: 20.352},
-                {number: 8803255, hash: "0x761a7faac7cae5ac51776e57c3cd49c9efac17a143b05e949c900c22166bf432", mined: "01.01.2010", miner: "0x829bd824b016326a401d083b33d092293333a830", transactions: 80, size: 20.352}
-            ]*/
         }
     },
     mounted()
     {
-        if(this.rest)
-        {
-            this.$axios
-          // 'http://localhost:51419/api/blockchain/blocks'
-                .get(address + 'blocks') // fill in server URI here
-                .then(response => {(this.blocks = response.data); console.log(this.blocks);})
-                // eslint-disable-next-line no-console
-                .catch(error => console.log("DUPA" + error))
-        }
-    },
-    filters: {
-        // currencydecimal (value) {
-        //     return value.toFixed(2)
-        // }
-    },
+        this.$axios
+            .get(address + 'blocks')
+            .then(response => {(this.blocks = response.data); })
+            // eslint-disable-next-line no-console
+            .catch(error => console.log(error))
+    }
+
 }
 
 </script>
-
-<style scoped>
-
-</style>

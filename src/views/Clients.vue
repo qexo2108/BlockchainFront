@@ -75,29 +75,18 @@ export default {
     data()
     {
         return {
-            // Switch to true if REST API is ready
-            rest: true,
-
             clients: []
-
         }
     },
     mounted()
     {
-        if(this.rest)
-        {
-            this.$axios
-                .get(address + 'clients')
-                .then(response => (this.clients = response.data))
-                // eslint-disable-next-line no-console
-                .catch(error => console.log(error))
-        }
+        this.$axios
+            .get(address + 'clients')
+            .then(response => (this.clients = response.data))
+            // eslint-disable-next-line no-console
+            .catch(error => console.log(error))
     }
 
 }
 
 </script>
-
-<style scoped>
-
-</style>

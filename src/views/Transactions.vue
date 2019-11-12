@@ -52,35 +52,30 @@
 import {address} from '../main'
 
 export default {
-data()
-{
-  return {
+    data()
+    {
+        return {
 
-    transactions: []
+        transactions: []
 
-  }
-},
+        }
+    },
 
-methods: {
+    methods: {
+        goToTransaction: function (transactionNumber)
+        {
+            this.$router.push('/transactions/' + transactionNumber)
+        }
+    },
 
-  goToTransaction: function (transactionNumber)
-  {
-    this.$router.push('/transactions/' + transactionNumber)
-  }
-},
-
-mounted()
-{
-
-  this.$axios
-          .get(address + 'transactions')
-          .then(response => (this.transactions = response.data))
-          // eslint-disable-next-line no-console
-          .catch(error => console.log(error))
-},
-
-
-
+    mounted()
+    {
+        this.$axios
+            .get(address + 'transactions')
+            .then(response => (this.transactions = response.data))
+            // eslint-disable-next-line no-console
+            .catch(error => console.log(error))
+    },
 
 
 }

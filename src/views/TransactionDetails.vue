@@ -110,19 +110,14 @@ export default {
 
     mounted()
     {
-
-      this.$axios
-              .get(address + 'transactions/' + this.$route.params.id)
-              .then(response => (this.transaction = response.data))
-              // eslint-disable-next-line no-console
-              .catch(error => console.log(error))
+        this.$axios
+            .get(address + 'transactions/' + this.$route.params.id)
+            .then(response => (this.transaction = response.data))
+            // eslint-disable-next-line no-console
+            .catch(error => console.log(error))
     },
-
 
 
   }
 </script>
 
-<style>
-
-</style>
