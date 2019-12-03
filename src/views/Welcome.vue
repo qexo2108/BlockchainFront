@@ -27,6 +27,9 @@ export default {
     goToBlocks: function () {
       this.$router.push('/blocks')
     }
-  }
+  },
+  data: () => ( {
+    message: {isNew: true, isUpdated: true}
+  } )
 }
 </script>

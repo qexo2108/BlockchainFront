@@ -17,6 +17,28 @@
                             <div class="headline"> <v-icon>fingerprint</v-icon>     {{ transaction.hash }}</div>
                         </div>
                     </v-card-title>
+                    <v-chip
+                            v-if="transaction.isNew"
+                            :color="`green lighten-1`"
+                            class="ml-0"
+                            text-color="white"
+                    >
+                        <v-avatar>
+                            <v-icon>mdi-new-box</v-icon>
+                        </v-avatar>
+                        New
+                    </v-chip>
+                    <v-chip
+                            v-if="transaction.isUpdated"
+                            :color="`yellow darken-3`"
+                            class="ml-0"
+                            text-color="white"
+                    >
+                        <v-avatar>
+                            <v-icon>mdi-restore</v-icon>
+                        </v-avatar>
+                        Updated
+                    </v-chip>
                 </v-flex>
                 <v-flex xs3>
                     <v-spacer></v-spacer>
